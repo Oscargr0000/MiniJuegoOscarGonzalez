@@ -2610,13 +2610,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fruits:
   - {fileID: 4521884673942725899, guid: 90e21446784029b439d123db8378cbdd, type: 3}
+  - {fileID: 4521884673942725899, guid: 90e21446784029b439d123db8378cbdd, type: 3}
+  - {fileID: 4521884673942725899, guid: 90e21446784029b439d123db8378cbdd, type: 3}
+  - {fileID: 369466432460211432, guid: 06941c0340acb8c438a650f3e25c5bc3, type: 3}
+  - {fileID: 369466432460211432, guid: 06941c0340acb8c438a650f3e25c5bc3, type: 3}
+  - {fileID: 2753503252059435487, guid: 3fe686c4601bcae479326e94f342d719, type: 3}
+  - {fileID: 2753503252059435487, guid: 3fe686c4601bcae479326e94f342d719, type: 3}
+  - {fileID: 2753503252059435487, guid: 3fe686c4601bcae479326e94f342d719, type: 3}
+  - {fileID: 369466432460211432, guid: 06941c0340acb8c438a650f3e25c5bc3, type: 3}
+  - {fileID: 369466432460211432, guid: 06941c0340acb8c438a650f3e25c5bc3, type: 3}
+  - {fileID: 2753503252059435487, guid: 3fe686c4601bcae479326e94f342d719, type: 3}
   - {fileID: 2753503252059435487, guid: 3fe686c4601bcae479326e94f342d719, type: 3}
   - {fileID: 7681985067182359441, guid: b9b690b0ede51624897cd9106b019fa7, type: 3}
+  - {fileID: 7681985067182359441, guid: b9b690b0ede51624897cd9106b019fa7, type: 3}
+  - {fileID: 7681985067182359441, guid: b9b690b0ede51624897cd9106b019fa7, type: 3}
   - {fileID: 4358968479821186860, guid: 95cc8da79ff27a542bbe506c3c64f212, type: 3}
-  fruitsPlus:
+  - {fileID: 4358968479821186860, guid: 95cc8da79ff27a542bbe506c3c64f212, type: 3}
   - {fileID: 7496139974964938722, guid: 15918d31526724b42957ba2c6fab6e9c, type: 3}
-  - {fileID: 369466432460211432, guid: 06941c0340acb8c438a650f3e25c5bc3, type: 3}
-  - {fileID: 7713445624351419959, guid: 8967b32ba7b021546bf4c24054228702, type: 3}
   - {fileID: 3915098283528637694, guid: 52333ea137e0b97479b899d0a26b868a, type: 3}
 --- !u!4 &1478558987
 Transform:
@@ -2626,7 +2636,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1478558985}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.97522, y: -2.515268, z: -0.06921236}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
