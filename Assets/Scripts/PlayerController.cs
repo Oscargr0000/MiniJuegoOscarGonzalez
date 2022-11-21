@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private float speed = 5.0f;
+    public float speed = 5.0f;
     private float forceJump = 250f;
     public const string HORIZONTAL = "Horizontal", VERTICAL = "Vertical";
     private float inputTol = 0.2f; // Tolerancia del input
     private float xInput, yInput;
-
+     
     private Rigidbody2D Rb;
     public int puntiacionCouter;
     private int MaxSaltos = 1;

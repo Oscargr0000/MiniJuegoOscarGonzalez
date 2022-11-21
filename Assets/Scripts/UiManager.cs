@@ -10,13 +10,13 @@ public class UiManager : MonoBehaviour
 
     private PlayerController Pc;
 
-    // Start is called before the first frame update
+
     void Start()
     {
         Pc = FindObjectOfType<PlayerController>();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         puntosText.text = Pc.puntiacionCouter.ToString();

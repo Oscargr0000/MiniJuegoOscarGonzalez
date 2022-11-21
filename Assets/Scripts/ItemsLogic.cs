@@ -9,6 +9,7 @@ public class ItemsLogic : MonoBehaviour
     public int recompensa;
 
     private SpawnManager Sm;
+    private PlayerController Pc;
 
     private void Update()
     {
@@ -21,7 +22,10 @@ public class ItemsLogic : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             Sm = FindObjectOfType<SpawnManager>();
+            Pc = FindObjectOfType<PlayerController>();
+
             Sm.spawnON = false;
+            Pc.speed = 0f;
             speed = 0f;
         }
     }
