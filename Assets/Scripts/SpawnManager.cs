@@ -7,15 +7,12 @@ public class SpawnManager : MonoBehaviour
     public GameObject[] fruits;
 
     private bool spawnON;
-    
-    
 
     // Start is called before the first frame update
     void Start()
     {
         spawnON = true;
         StartCoroutine(Spawn(2));
-        Debug.Log("Screen Width : " + Screen.width);
     }
 
     IEnumerator Spawn(float waitTime)
@@ -25,7 +22,8 @@ public class SpawnManager : MonoBehaviour
         {
             int randomNum = Random.Range(0, fruits.Length);
 
-            Vector2 position = new Vector2(Random.Range(-5, 10), 4);
+            Vector2 position = new Vector2(Random.Range(-8f, 8f), 4);
+
 
             Instantiate(fruits[randomNum], position, transform.rotation);
 
