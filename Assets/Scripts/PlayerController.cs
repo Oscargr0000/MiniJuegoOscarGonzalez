@@ -45,7 +45,6 @@ public class PlayerController : MonoBehaviour
                     Rb.AddForce(Vector2.up * forceJump * Time.deltaTime, ForceMode2D.Impulse);
                     saltosRes--;
                 }
-                    
             }
         
         //DASH

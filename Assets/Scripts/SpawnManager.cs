@@ -6,9 +6,8 @@ public class SpawnManager : MonoBehaviour
 {
     public GameObject[] fruits;
 
-    private bool spawnON;
+    public bool spawnON;
 
-    // Start is called before the first frame update
     void Start()
     {
         spawnON = true;

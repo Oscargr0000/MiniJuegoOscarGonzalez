@@ -8,6 +8,8 @@ public class ItemsLogic : MonoBehaviour
 
     public int recompensa;
 
+    private SpawnManager Sm;
+
     private void Update()
     {
         transform.Translate(Vector2.down * speed * Time.deltaTime);
@@ -18,7 +20,9 @@ public class ItemsLogic : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            Debug.Log("GameOver");
+            Sm = FindObjectOfType<SpawnManager>();
+            Sm.spawnON = false;
+            speed = 0f;
         }
     }
 
