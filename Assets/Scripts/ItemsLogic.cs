@@ -25,7 +25,7 @@ public class ItemsLogic : MonoBehaviour
             Pc = FindObjectOfType<PlayerController>();
 
             Sm.spawnON = false;
-            Pc.speed = 0f;
+            //Pc.speed = 0f;
             speed = 0f;
         }
     }
