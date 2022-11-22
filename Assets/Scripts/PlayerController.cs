@@ -4,28 +4,35 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 70f;
-    private float forceJump = 25000f;
+    public float speed = 400f;
+    private float forceJump = 30000f;
     public const string HORIZONTAL = "Horizontal", VERTICAL = "Vertical";
     private float inputTol = 0.2f; // Tolerancia del input
     private float xInput, yInput;
      
-    private Rigidbody2D Rb;
-    public int puntiacionCouter;
+    
+    
     private int MaxSaltos = 1;
-    public int saltosRes;
+    private int saltosRes;
 
+    private bool onAir;
     private bool isWalking;
+
     private Animator _animator;
     private SpriteRenderer Sr;
+    private Rigidbody2D Rb;
+    private CapsuleCollider2D Cc;
 
-    
+    public LayerMask Ground;
+    public int puntiacionCouter;
+
 
     private void Awake()
     {
         Rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         Sr = GetComponent<SpriteRenderer>();
+        Cc = GetComponent<CapsuleCollider2D>();
     }
 
     private void Start()
@@ -35,39 +42,37 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         isWalking = false;
-        DetectGround();
 
-        xInput = Input.GetAxisRaw(HORIZONTAL);
-        if (Mathf.Abs(xInput) > inputTol)
+        
+
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            Vector2 translation = new Vector2(xInput * speed, 0);
-
-            Rb.velocity = translation;
-
-            isWalking = true;
-            if (xInput < 0)
+            DetectGround();
+            if (saltosRes > 0)
             {
-                Sr.flipX = true;
-            }
-            else
-            {
-                Sr.flipX = false;
-            }
-
-
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                
-
-                if (saltosRes > 0)
-                {
-                    Rb.AddForce(Vector2.up * forceJump * Time.deltaTime, ForceMode2D.Impulse);
-                    saltosRes--;
-                }
+                Rb.AddForce(Vector2.up * forceJump * Time.deltaTime, ForceMode2D.Impulse);
+                saltosRes--;
             }
         }
 
-        
+
+        xInput = Input.GetAxisRaw(HORIZONTAL);
+            if (Mathf.Abs(xInput) > inputTol && onAir.Equals(false))
+            {
+                float speed2 = 400f;
+                Vector2 translation = new Vector2(xInput * speed2, 0);
+                Rb.AddForce(translation, ForceMode2D.Force);
+
+                isWalking = true;
+                if (xInput < 0)
+                {
+                    Sr.flipX = true;
+                }
+                else
+                {
+                    Sr.flipX = false;
+                }
+            }
 
     }
 
@@ -102,20 +107,26 @@ public class PlayerController : MonoBehaviour
 
     void DetectGround()
     {
-        float RaycastLimit = 0.7f;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, RaycastLimit);
+        float RayCastExtented = 0.01f;
+        float RayCastLimit = Cc.bounds.extents.y + RayCastExtented;
+        RaycastHit2D hit = Physics2D.BoxCast(Cc.bounds.center,Cc.bounds.size,0f, Vector2.down, RayCastExtented, Ground);
 
         Color raycolor;
         if (hit.collider != null)
         {
             saltosRes = MaxSaltos;
+
+
             raycolor = Color.green;
         }
         else
         {
             raycolor = Color.red;
         }
-        Debug.DrawRay(transform.position, Vector2.down * RaycastLimit, raycolor);
+
+        Debug.DrawRay(transform.position + new Vector3(Cc.bounds.extents.x,0), Vector2.down * RayCastLimit, raycolor);
+        Debug.DrawRay(transform.position - new Vector3(Cc.bounds.extents.x, 0), Vector2.down * RayCastLimit, raycolor);
+        Debug.DrawRay(transform.position - new Vector3(Cc.bounds.extents.x, RayCastLimit), Vector2.right * Cc.bounds.extents.x, raycolor);
 
         //return hit.collider != null;
     }

@@ -20,6 +20,6 @@ public class UiManager : MonoBehaviour
     void Update()
     {
         puntosText.text = Pc.puntiacionCouter.ToString();
-        timeText.text = Time.time.ToString("f2");
+        timeText.text = Time.time.ToString("f0");
     }
 }
