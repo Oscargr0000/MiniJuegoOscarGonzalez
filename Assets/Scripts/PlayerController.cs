@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 400f;
+    public float speed;
     private float forceJump = 30000f;
     public const string HORIZONTAL = "Horizontal", VERTICAL = "Vertical";
     private float inputTol = 0.2f; // Tolerancia del input
@@ -59,8 +59,8 @@ public class PlayerController : MonoBehaviour
         xInput = Input.GetAxisRaw(HORIZONTAL);
             if (Mathf.Abs(xInput) > inputTol && onAir.Equals(false))
             {
-                float speed2 = 400f;
-                Vector2 translation = new Vector2(xInput * speed2, 0);
+                //float speed2 = 400f;
+                Vector2 translation = new Vector2(xInput * speed, 0);
                 Rb.AddForce(translation, ForceMode2D.Force);
 
                 isWalking = true;

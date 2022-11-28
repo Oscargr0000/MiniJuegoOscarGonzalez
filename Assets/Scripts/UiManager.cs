@@ -7,13 +7,18 @@ public class UiManager : MonoBehaviour
 {
     public TextMeshProUGUI timeText;
     public TextMeshProUGUI puntosText;
+    public GameObject gameOverCanvas;   
 
     private PlayerController Pc;
+
+
 
 
     void Start()
     {
         Pc = FindObjectOfType<PlayerController>();
+
+        gameOverCanvas.SetActive(false);
     }
 
 

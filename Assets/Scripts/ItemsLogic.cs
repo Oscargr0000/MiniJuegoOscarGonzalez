@@ -10,6 +10,7 @@ public class ItemsLogic : MonoBehaviour
 
     private SpawnManager Sm;
     private PlayerController Pc;
+    private UiManager UM;
 
     private void Update()
     {
@@ -23,9 +24,13 @@ public class ItemsLogic : MonoBehaviour
         {
             Sm = FindObjectOfType<SpawnManager>();
             Pc = FindObjectOfType<PlayerController>();
+            UM = FindObjectOfType<UiManager>();
 
+            Time.timeScale = 0f;
+
+            UM.gameOverCanvas.SetActive(true);
+            Pc.enabled = false;
             Sm.spawnON = false;
-            Pc.speed = 0f;
             speed = 0f;
         }
     }
