@@ -25,4 +25,9 @@ public class PowersManager : MonoBehaviour
 
     }
 
+    private void TimeStop()
+    {
+
+    }
+
 }

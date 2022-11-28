@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float speed;
-    private float forceJump = 30000f;
+    [SerializeField]private float forceJump = 30000f;
     public const string HORIZONTAL = "Horizontal", VERTICAL = "Vertical";
     private float inputTol = 0.2f; // Tolerancia del input
     private float xInput, yInput;
@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer Sr;
     private Rigidbody2D Rb;
     private CapsuleCollider2D Cc;
+    private AudioManager Am;
 
     public LayerMask Ground;
     public int puntiacionCouter;
@@ -33,11 +34,14 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponent<Animator>();
         Sr = GetComponent<SpriteRenderer>();
         Cc = GetComponent<CapsuleCollider2D>();
+        Am = FindObjectOfType<AudioManager>();
     }
 
     private void Start()
     {
         saltosRes = MaxSaltos;
+        Am.PLayMusic(0);
+
     }
     void Update()
     {
@@ -76,16 +80,6 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void FixedUpdate()
-    {
-        //SALTO
-        
-
-
-
-        //DASH
-    }
-
     private void LateUpdate()
     {
         _animator.SetBool("isWalking", isWalking);
@@ -101,7 +95,7 @@ public class PlayerController : MonoBehaviour
             int reco = collision.gameObject.GetComponent<ItemsLogic>().recompensa;
 
             puntiacionCouter = puntiacionCouter + reco;
-            Debug.Log(puntiacionCouter);
+            Am.PLaySound(Random.Range(0,3));
         }
     }
 
@@ -127,7 +121,5 @@ public class PlayerController : MonoBehaviour
         Debug.DrawRay(transform.position + new Vector3(Cc.bounds.extents.x,0), Vector2.down * RayCastLimit, raycolor);
         Debug.DrawRay(transform.position - new Vector3(Cc.bounds.extents.x, 0), Vector2.down * RayCastLimit, raycolor);
         Debug.DrawRay(transform.position - new Vector3(Cc.bounds.extents.x, RayCastLimit), Vector2.right * Cc.bounds.extents.x, raycolor);
-
-        //return hit.collider != null;
     }
 }
