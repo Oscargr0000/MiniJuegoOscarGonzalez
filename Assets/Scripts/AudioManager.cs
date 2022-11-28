@@ -21,7 +21,6 @@ public class AudioManager : MonoBehaviour
         _musicSource.PlayOneShot(music[musics]);
     }
 
-
     public void PLaySound(int sounds)
     {
         _audiosource.PlayOneShot(sound[sounds]);
