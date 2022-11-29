@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
     {
         saltosRes = MaxSaltos;
         Am.PLayMusic(0);
+        
 
     }
     void Update()
@@ -63,7 +64,6 @@ public class PlayerController : MonoBehaviour
         xInput = Input.GetAxisRaw(HORIZONTAL);
             if (Mathf.Abs(xInput) > inputTol && onAir.Equals(false))
             {
-                //float speed2 = 400f;
                 Vector2 translation = new Vector2(xInput * speed, 0);
                 Rb.AddForce(translation, ForceMode2D.Force);
 

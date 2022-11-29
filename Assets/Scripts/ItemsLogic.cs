@@ -23,19 +23,29 @@ public class ItemsLogic : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            Sm = FindObjectOfType<SpawnManager>();
-            Pc = FindObjectOfType<PlayerController>();
-            UM = FindObjectOfType<UiManager>();
-            Am = FindObjectOfType<AudioManager>();
-
-            Time.timeScale = 0f;
-
-            Am._musicSource.Stop();
-            UM.gameOverCanvas.SetActive(true);
-            Pc.enabled = false;
-            Sm.spawnON = false;
-            speed = 0f;
+            GameOver();
         }
+    }
+
+
+    void GameOver()
+    {
+        Sm = FindObjectOfType<SpawnManager>();
+        Pc = FindObjectOfType<PlayerController>();
+        UM = FindObjectOfType<UiManager>();
+        Am = FindObjectOfType<AudioManager>();
+
+        UM.GameOverUI();
+
+        Time.timeScale = 0f;
+
+        Am._musicSource.Stop();
+        
+        Pc.enabled = false;
+        Sm.spawnON = false;
+        speed = 0f;
+
+        
     }
 
 }
