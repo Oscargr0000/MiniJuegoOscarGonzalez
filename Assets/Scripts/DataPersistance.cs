@@ -17,26 +17,31 @@ public class DataPersistance : MonoBehaviour
         _uiManager = FindObjectOfType<UiManager>();
         _playerController = FindObjectOfType<PlayerController>();
     }
-
-
-    public void SaveData()
+    private void Start()
     {
-        if (_playerController.puntiacionCouter >= maxPoints)
-        {
-            maxPoints = _playerController.puntiacionCouter;
-            Debug.Log(maxPoints);
-        }
+        maxPoints = PlayerPrefs.GetInt("puntuacionInt");
+        maxTime = PlayerPrefs.GetFloat("tiempoFloat");
+    }
 
-        if (_uiManager.currentTime >= maxTime)
-        {
-            maxTime = _uiManager.currentTime;
-        }
 
+
+
+
+
+
+
+    public void SaveDataPoints()
+    {
+        maxPoints = _playerController.puntiacionCouter;
         PlayerPrefs.SetInt("puntuacionInt", maxPoints);
+        PlayerPrefs.Save();   
+    }
+
+    public void SaveTime()
+    {
+        maxTime = _uiManager.currentTime;
         PlayerPrefs.SetFloat("tiempoFloat", maxTime);
         PlayerPrefs.Save();
-
-        
     }
 
     public void LoadData()
@@ -44,4 +49,6 @@ public class DataPersistance : MonoBehaviour
         _uiManager.recordPpoint.text = PlayerPrefs.GetInt("puntuacionInt").ToString();
         _uiManager.recordTpoint.text = PlayerPrefs.GetFloat("tiempoFloat").ToString("f2");
     }
+
+
 }

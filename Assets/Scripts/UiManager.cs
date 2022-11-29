@@ -47,9 +47,18 @@ public class UiManager : MonoBehaviour
 
     public void GameOverUI()
     {
-        Dp.SaveData();
+
+        if (Pc.totalPuntos > Dp.maxPoints)
+        {
+            Dp.SaveDataPoints();
+        }
+
+        if(currentTime > Dp.maxTime)
+        {
+            Dp.SaveTime();
+        }
+
         Dp.LoadData();
-       
         tPointsOver.text = timeText.text;
         pPointsOver.text = puntosText.text;
 

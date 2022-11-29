@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
 
     public LayerMask Ground;
     public int puntiacionCouter;
+    public int totalPuntos;
 
 
     private void Awake()
@@ -95,6 +96,7 @@ public class PlayerController : MonoBehaviour
             int reco = collision.gameObject.GetComponent<ItemsLogic>().recompensa;
 
             puntiacionCouter = puntiacionCouter + reco;
+            totalPuntos = puntiacionCouter;
             Am.PLaySound(Random.Range(0,3));
         }
     }
