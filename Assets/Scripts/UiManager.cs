@@ -45,7 +45,7 @@ public class UiManager : MonoBehaviour
 
     public void RestartScene()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
         Time.timeScale = 1f;
         currentTime = 0f;
     }
@@ -72,5 +72,10 @@ public class UiManager : MonoBehaviour
 
         gameOverCanvas.SetActive(true);
         uiCanvas.SetActive(false);
+    }
+
+    public void GoTo(int escena)
+    {
+        SceneManager.LoadScene(escena);
     }
 }

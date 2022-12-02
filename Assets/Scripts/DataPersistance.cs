@@ -12,6 +12,7 @@ public class DataPersistance : MonoBehaviour
     public int maxPoints;
     public float maxTime;
     public int puntuacionData;
+    public float itemsSpeed;
 
     private void Awake()
     {
@@ -23,6 +24,8 @@ public class DataPersistance : MonoBehaviour
         maxPoints = PlayerPrefs.GetInt("puntuacionInt");
         maxTime = PlayerPrefs.GetFloat("tiempoFloat");
         puntuacionData = PlayerPrefs.GetInt("currentPoints");
+
+        PlayerPrefs.SetFloat("itemsSpeed", 1.5f);
     }
 
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemsLogic : MonoBehaviour
 {
-    private float speed = 1.5f;
+    
 
     public int recompensa;
 
@@ -13,9 +13,21 @@ public class ItemsLogic : MonoBehaviour
     private UiManager UM;
     private AudioManager Am;
 
+    public int spawnedCouter;
+    private float multiplySpeed;
+
+    private void Start()
+    {
+        spawnedCouter++;
+
+
+        PlayerPrefs.SetFloat("itemsSpeed", PlayerPrefs.GetFloat("itemsSpeed") + spawnedCouter * 0.03f);
+    }
+
     private void Update()
     {
-        transform.Translate(Vector2.down * speed * Time.deltaTime);
+        transform.Translate(Vector2.down * PlayerPrefs.GetFloat("itemsSpeed") * Time.deltaTime);
+
     }
 
 
@@ -43,7 +55,6 @@ public class ItemsLogic : MonoBehaviour
         
         Pc.enabled = false;
         Sm.spawnON = false;
-        speed = 0f;
 
         
     }

@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D Rb;
     private CapsuleCollider2D Cc;
     private AudioManager Am;
+    private ItemsLogic Il;
 
     public LayerMask Ground;
     public int puntiacionCouter;
@@ -36,13 +37,13 @@ public class PlayerController : MonoBehaviour
         Sr = GetComponent<SpriteRenderer>();
         Cc = GetComponent<CapsuleCollider2D>();
         Am = FindObjectOfType<AudioManager>();
+        Il = FindObjectOfType<ItemsLogic>();
     }
 
     private void Start()
     {
         saltosRes = MaxSaltos;
         Am.PLayMusic(0);
-        
 
     }
     void Update()
@@ -78,7 +79,6 @@ public class PlayerController : MonoBehaviour
                     Sr.flipX = false;
                 }
             }
-
     }
 
     private void LateUpdate()
