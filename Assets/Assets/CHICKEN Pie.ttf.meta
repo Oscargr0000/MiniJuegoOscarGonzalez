@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: c2a779b771027384689ed39ebab0f05f
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - CHICKEN Pie
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 713fa15cd190a7941967ed5e4794ead2, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
