@@ -7,14 +7,15 @@ public class SpawnManager : MonoBehaviour
     public GameObject[] fruits;
 
     public bool spawnON;
+    private int test;
 
     void Start()
     {
         spawnON = true;
-        StartCoroutine(Spawn(2));
+        StartCoroutine(Spawn(PlayerPrefs.GetFloat("spawnRate")));
     }
 
-    IEnumerator Spawn(float waitTime)
+    public IEnumerator Spawn(float waitTime)
     {
 
         while (spawnON.Equals(true))
@@ -23,10 +24,12 @@ public class SpawnManager : MonoBehaviour
 
             Vector2 position = new Vector2(Random.Range(-8f, 8f), 4);
 
+            PlayerPrefs.SetFloat("spawnRate", PlayerPrefs.GetFloat("spawnRate") - 0.03f);
+            Debug.Log(PlayerPrefs.GetFloat("spawnRate"));
 
             Instantiate(fruits[randomNum], position, transform.rotation);
 
-            yield return new WaitForSeconds(waitTime);
+            yield return new WaitForSeconds(PlayerPrefs.GetFloat("spawnRate"));
         }
        
     }

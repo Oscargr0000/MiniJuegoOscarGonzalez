@@ -8,6 +8,7 @@ public class DataPersistance : MonoBehaviour
     private ItemsLogic _itemLogic;
     private SpawnManager _spawnManager;
     private PlayerController _playerController;
+    private MainMenuManager _Mmm;
 
     public int maxPoints;
     public float maxTime;
@@ -18,6 +19,8 @@ public class DataPersistance : MonoBehaviour
     {
         _uiManager = FindObjectOfType<UiManager>();
         _playerController = FindObjectOfType<PlayerController>();
+        _Mmm = FindObjectOfType<MainMenuManager>();
+        PlayerPrefs.SetFloat("spawnRate", 2);
     }
     private void Start()
     {
@@ -26,6 +29,7 @@ public class DataPersistance : MonoBehaviour
         puntuacionData = PlayerPrefs.GetInt("currentPoints");
 
         PlayerPrefs.SetFloat("itemsSpeed", 1.5f);
+
     }
 
 

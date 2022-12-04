@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
 {
@@ -26,6 +27,12 @@ public class UiManager : MonoBehaviour
     private bool gameOver;
 
 
+    private float maxTime;
+
+    private float coolDownDash;
+    public Image backgroundCrono;
+
+
     void Start()
     {
         Pc = FindObjectOfType<PlayerController>();
@@ -33,6 +40,8 @@ public class UiManager : MonoBehaviour
         uiCanvas.SetActive(true);
         gameOverCanvas.SetActive(false);
         gameOver = false;
+        maxTime = Pc.dashColdDown;
+        coolDownDash = maxTime;
     }
 
 
@@ -41,6 +50,8 @@ public class UiManager : MonoBehaviour
         puntosText.text = Pc.puntiacionCouter.ToString();
         currentTime += Time.deltaTime;
         timeText.text = currentTime.ToString("f2");
+
+        cronometro();
     }
 
     public void RestartScene()
@@ -77,5 +88,20 @@ public class UiManager : MonoBehaviour
     public void GoTo(int escena)
     {
         SceneManager.LoadScene(escena);
+    }
+
+
+    void cronometro()
+    {
+        coolDownDash -= Time.deltaTime;
+
+        if (coolDownDash <= 0f)
+        {
+            coolDownDash = 0f;
+        }
+
+        backgroundCrono.fillAmount = coolDownDash / maxTime;
+
+
     }
 }

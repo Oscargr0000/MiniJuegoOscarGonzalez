@@ -5,10 +5,20 @@ using UnityEngine;
 public class PowersManager : MonoBehaviour
 {
     private PlayerController Pc;
+    private DataPersistance DP;
+
+    
 
     private void Awake()
     {
         Pc = FindObjectOfType<PlayerController>();
+        DP = FindObjectOfType<DataPersistance>();
+        
+    }
+
+    private void Update()
+    {
+        
     }
     private void SpeedUp()
     {

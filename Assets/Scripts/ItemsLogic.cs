@@ -14,20 +14,26 @@ public class ItemsLogic : MonoBehaviour
     private AudioManager Am;
 
     public int spawnedCouter;
-    private float multiplySpeed;
+
+    public bool isActivated;
+
 
     private void Start()
     {
+        isActivated = true;
         spawnedCouter++;
 
-
+        Pc = FindObjectOfType<PlayerController>();
         PlayerPrefs.SetFloat("itemsSpeed", PlayerPrefs.GetFloat("itemsSpeed") + spawnedCouter * 0.03f);
     }
 
     private void Update()
     {
-        transform.Translate(Vector2.down * PlayerPrefs.GetFloat("itemsSpeed") * Time.deltaTime);
-
+        if (Pc.desactivateTime.Equals(false))
+        {
+            transform.Translate(Vector2.down * PlayerPrefs.GetFloat("itemsSpeed") * Time.deltaTime);
+        }
+        
     }
 
 
@@ -43,7 +49,7 @@ public class ItemsLogic : MonoBehaviour
     void GameOver()
     {
         Sm = FindObjectOfType<SpawnManager>();
-        Pc = FindObjectOfType<PlayerController>();
+        
         UM = FindObjectOfType<UiManager>();
         Am = FindObjectOfType<AudioManager>();
 

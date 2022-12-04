@@ -11,12 +11,11 @@ public class MainMenuManager : MonoBehaviour
 
     public GameObject Shop;
     public GameObject Menu;
-    public TextMeshProUGUI alert;
-    public Animator _animator;
+    public GameObject alert;
 
     private AudioManager Am;
 
-    private bool dash;
+    public bool dash;
     private bool dobleJump;
     private bool TimeStop;
 
@@ -32,6 +31,7 @@ public class MainMenuManager : MonoBehaviour
         totalPoints.text = PlayerPrefs.GetInt("currentPoints").ToString();
         Shop.SetActive(false);
         Menu.SetActive(true);
+        alert.SetActive(false);
     }
 
     private void Update()
@@ -48,21 +48,27 @@ public class MainMenuManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("currentPoints", PlayerPrefs.GetInt("currentPoints") - price);
 
-            if (price.Equals(500) && dobleJump.Equals(false))
+            if (price.Equals(500) && PlayerPrefs.GetInt("dobleJump") != 1)
             {
                 dobleJump = true;
+                PlayerPrefs.SetInt("dobleJump", 1);
 
-            }else if (price.Equals(1500)&& dash.Equals(false))
+            }
+            else if (price.Equals(1500)&& PlayerPrefs.GetInt("dashBool") != 1)
             {
                 dash = true;
-            }else if (price.Equals(4000) && TimeStop.Equals(false))
+                PlayerPrefs.SetInt("dashBool", 1);
+            }
+            else if (price.Equals(4000) && PlayerPrefs.GetInt("timeStop") != 1)
             {
                 TimeStop = true;
+                PlayerPrefs.SetInt("timeStop", 1);
             }
             else
             {
-                Debug.Log("funciona");
-                StartCoroutine(Fade());
+                alert.SetActive(true);
+                PlayerPrefs.SetInt("currentPoints", PlayerPrefs.GetInt("currentPoints") + price);
+                StartCoroutine(DesactivateAlert());
             }
         }
 
@@ -90,14 +96,11 @@ public class MainMenuManager : MonoBehaviour
         Am.PLaySound(2);
     }
 
-    IEnumerator Fade()
+    IEnumerator DesactivateAlert()
     {
-        for (float ft = 1f; ft >= 0; ft -= 0.1f)
-        {
-            Color c = alert.color;
-            c.a = ft;
-            alert.color = c;
-            yield return null;
-        }
+        yield return new WaitForSeconds(1);
+
+        alert.SetActive(false);
+        
     }
 }

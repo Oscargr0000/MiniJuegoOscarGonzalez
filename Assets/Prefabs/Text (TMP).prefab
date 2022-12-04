@@ -69,8 +69,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: You already own this power
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: eb68f9d216832ab409efe8e8f0c1c283, type: 2}
-  m_sharedMaterial: {fileID: -4835788076755211986, guid: eb68f9d216832ab409efe8e8f0c1c283, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 940f8835ac176a946a77db58cc919cd4, type: 2}
+  m_sharedMaterial: {fileID: 922738747892463497, guid: 940f8835ac176a946a77db58cc919cd4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -94,8 +94,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26.4
-  m_fontSizeBase: 26.4
+  m_fontSize: 29.5
+  m_fontSizeBase: 29.5
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

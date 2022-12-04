@@ -24,10 +24,19 @@ public class PlayerController : MonoBehaviour
     private CapsuleCollider2D Cc;
     private AudioManager Am;
     private ItemsLogic Il;
+    private SpawnManager Sm;
 
     public LayerMask Ground;
     public int puntiacionCouter;
     public int totalPuntos;
+
+    private bool activateDash;
+    private bool activateJump;
+    private bool activateTime;
+    private bool timeStopState;
+
+    public bool desactivateTime;
+    public float dashColdDown = 3f;
 
 
     private void Awake()
@@ -38,12 +47,30 @@ public class PlayerController : MonoBehaviour
         Cc = GetComponent<CapsuleCollider2D>();
         Am = FindObjectOfType<AudioManager>();
         Il = FindObjectOfType<ItemsLogic>();
+        Sm = FindObjectOfType<SpawnManager>();
+
+        if (PlayerPrefs.GetInt("dashBool").Equals(1))
+        {
+            activateDash = true;
+        }
+        
+        if (PlayerPrefs.GetInt("dobleJump").Equals(1))
+        {
+            MaxSaltos = 2;
+        } 
+        
+        if (PlayerPrefs.GetInt("timeStop").Equals(1))
+        {
+            activateTime = true;
+        }
     }
 
     private void Start()
     {
         saltosRes = MaxSaltos;
         Am.PLayMusic(0);
+        desactivateTime = false;
+        timeStopState = false;
 
     }
     void Update()
@@ -79,6 +106,31 @@ public class PlayerController : MonoBehaviour
                     Sr.flipX = false;
                 }
             }
+
+        if(activateDash.Equals(true))
+        {
+
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                float direction = xInput * 2 ;
+                transform.position =  new Vector2(transform.position.x + direction, transform.position.y);
+                
+                StartCoroutine(DashColdDown(dashColdDown));
+            }
+            
+        }
+
+
+        if (activateTime.Equals(true))
+        {
+            if (Input.GetKeyDown(KeyCode.R) && timeStopState.Equals(false))
+            {
+                timeStopState = true;
+                desactivateTime = true;
+                Sm.spawnON = false;
+                StartCoroutine(ActivateTimeIE());
+            }
+        }
     }
 
     private void LateUpdate()
@@ -123,5 +175,20 @@ public class PlayerController : MonoBehaviour
         Debug.DrawRay(transform.position + new Vector3(Cc.bounds.extents.x,0), Vector2.down * RayCastLimit, raycolor);
         Debug.DrawRay(transform.position - new Vector3(Cc.bounds.extents.x, 0), Vector2.down * RayCastLimit, raycolor);
         Debug.DrawRay(transform.position - new Vector3(Cc.bounds.extents.x, RayCastLimit), Vector2.right * Cc.bounds.extents.x, raycolor);
+    }
+
+    public IEnumerator DashColdDown(float time)
+    {
+        activateDash = false;
+        yield return new WaitForSeconds(time);
+        activateDash = true;
+    }
+
+    public IEnumerator ActivateTimeIE()
+    {
+        yield return new WaitForSeconds(3);
+        desactivateTime = false;
+        Sm.spawnON = true;
+        StartCoroutine(Sm.Spawn(2));
     }
 }
