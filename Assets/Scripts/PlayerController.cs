@@ -25,18 +25,20 @@ public class PlayerController : MonoBehaviour
     private AudioManager Am;
     private ItemsLogic Il;
     private SpawnManager Sm;
+    private UiManager Um;
 
     public LayerMask Ground;
     public int puntiacionCouter;
     public int totalPuntos;
 
     private bool activateDash;
-    private bool activateJump;
     private bool activateTime;
     private bool timeStopState;
 
     public bool desactivateTime;
-    public float dashColdDown = 3f;
+    public int dashColdDown = 3;
+    public bool activatecolddown;
+    private bool dashState;
 
 
     private void Awake()
@@ -48,6 +50,8 @@ public class PlayerController : MonoBehaviour
         Am = FindObjectOfType<AudioManager>();
         Il = FindObjectOfType<ItemsLogic>();
         Sm = FindObjectOfType<SpawnManager>();
+        Um = FindObjectOfType<UiManager>();
+        
 
         if (PlayerPrefs.GetInt("dashBool").Equals(1))
         {
@@ -71,6 +75,8 @@ public class PlayerController : MonoBehaviour
         Am.PLayMusic(0);
         desactivateTime = false;
         timeStopState = false;
+        activatecolddown = false;
+        dashState = true;
 
     }
     void Update()
@@ -107,20 +113,26 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
+            //DASH
         if(activateDash.Equals(true))
         {
-
-            if (Input.GetKeyDown(KeyCode.LeftShift))
+            if (Input.GetKeyDown(KeyCode.LeftShift) && dashState.Equals(true))
             {
-                float direction = xInput * 2 ;
-                transform.position =  new Vector2(transform.position.x + direction, transform.position.y);
-                
+                float direction = xInput * 2;
+                transform.position = new Vector2(transform.position.x + direction, transform.position.y);
+                dashState = false;
                 StartCoroutine(DashColdDown(dashColdDown));
+                activatecolddown = true;
+
             }
-            
+
+            if (activatecolddown.Equals(true))
+            {
+                Um.cronometro();
+            }
         }
 
-
+        //TIMESTOP
         if (activateTime.Equals(true))
         {
             if (Input.GetKeyDown(KeyCode.R) && timeStopState.Equals(false))
@@ -128,6 +140,7 @@ public class PlayerController : MonoBehaviour
                 timeStopState = true;
                 desactivateTime = true;
                 Sm.spawnON = false;
+                
                 StartCoroutine(ActivateTimeIE());
             }
         }
@@ -177,15 +190,19 @@ public class PlayerController : MonoBehaviour
         Debug.DrawRay(transform.position - new Vector3(Cc.bounds.extents.x, RayCastLimit), Vector2.right * Cc.bounds.extents.x, raycolor);
     }
 
-    public IEnumerator DashColdDown(float time)
+
+    //DASH COLDDOWN
+    public IEnumerator DashColdDown(int time)
     {
-        activateDash = false;
         yield return new WaitForSeconds(time);
         activateDash = true;
+        dashState = true;
+        
     }
 
     public IEnumerator ActivateTimeIE()
     {
+        
         yield return new WaitForSeconds(3);
         desactivateTime = false;
         Sm.spawnON = true;

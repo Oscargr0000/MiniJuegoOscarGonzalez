@@ -50,8 +50,7 @@ public class UiManager : MonoBehaviour
         puntosText.text = Pc.puntiacionCouter.ToString();
         currentTime += Time.deltaTime;
         timeText.text = currentTime.ToString("f2");
-
-        cronometro();
+        
     }
 
     public void RestartScene()
@@ -91,13 +90,14 @@ public class UiManager : MonoBehaviour
     }
 
 
-    void cronometro()
+     public void cronometro()
     {
         coolDownDash -= Time.deltaTime;
 
         if (coolDownDash <= 0f)
         {
             coolDownDash = 0f;
+           Pc.activatecolddown = false;
         }
 
         backgroundCrono.fillAmount = coolDownDash / maxTime;
