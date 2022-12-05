@@ -17,7 +17,6 @@ public class ItemsLogic : MonoBehaviour
 
     public bool isActivated;
 
-
     private void Start()
     {
         isActivated = true;
@@ -52,7 +51,6 @@ public class ItemsLogic : MonoBehaviour
         
         UM = FindObjectOfType<UiManager>();
         Am = FindObjectOfType<AudioManager>();
-
         UM.GameOverUI();
 
         Time.timeScale = 0f;

@@ -125,3 +125,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recompensa: 3
+  spawnedCouter: 0
+  isActivated: 0

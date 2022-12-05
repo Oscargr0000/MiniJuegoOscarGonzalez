@@ -24,13 +24,17 @@ public class UiManager : MonoBehaviour
 
     public float currentTime;
 
-    private bool gameOver;
-
 
     private float maxTime;
 
     private float coolDownDash;
     public Image backgroundCrono;
+    public GameObject timeStopUI;
+    public GameObject timeStopEffect;
+
+
+    public GameObject uiTimPower;
+    public GameObject uiDashPower;
 
 
     void Start()
@@ -39,9 +43,22 @@ public class UiManager : MonoBehaviour
         Dp = FindObjectOfType<DataPersistance>();
         uiCanvas.SetActive(true);
         gameOverCanvas.SetActive(false);
-        gameOver = false;
         maxTime = Pc.dashColdDown;
-        coolDownDash = maxTime;
+        coolDownDash = 0f;
+        timeStopEffect.SetActive(false);
+
+        uiTimPower.SetActive(false);
+        uiDashPower.SetActive(false);
+
+        if (PlayerPrefs.GetInt("timeStop").Equals(1))
+        {
+            uiTimPower.SetActive(true);
+        }
+
+        if (PlayerPrefs.GetInt("dashBool").Equals(1))
+        {
+            uiDashPower.SetActive(true);
+        }
     }
 
 
@@ -50,7 +67,6 @@ public class UiManager : MonoBehaviour
         puntosText.text = Pc.puntiacionCouter.ToString();
         currentTime += Time.deltaTime;
         timeText.text = currentTime.ToString("f2");
-        
     }
 
     public void RestartScene()
@@ -73,7 +89,6 @@ public class UiManager : MonoBehaviour
             Dp.SaveTime();
         }
 
-        gameOver = true;
         Dp.SaveCurrentPoints();
         Dp.LoadData();
 
@@ -92,16 +107,30 @@ public class UiManager : MonoBehaviour
 
      public void cronometro()
     {
-        coolDownDash -= Time.deltaTime;
+        coolDownDash += Time.deltaTime;
 
-        if (coolDownDash <= 0f)
-        {
-            coolDownDash = 0f;
-           Pc.activatecolddown = false;
-        }
-
+        
         backgroundCrono.fillAmount = coolDownDash / maxTime;
 
+        if (maxTime <= coolDownDash)
+        {
+            coolDownDash = 0f;
+            Pc.activatecolddown = false;
+        }
 
+    }
+   
+
+    public void TimeStoped()
+    {
+        StartCoroutine(DesactivateTimeUI());
+        timeStopUI.SetActive(false);
+        timeStopEffect.SetActive(true);
+    }
+
+    IEnumerator DesactivateTimeUI()
+    {
+        yield return new WaitForSeconds(3);
+        timeStopEffect.SetActive(false);
     }
 }

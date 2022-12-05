@@ -12,12 +12,11 @@ public class MainMenuManager : MonoBehaviour
     public GameObject Shop;
     public GameObject Menu;
     public GameObject alert;
+    public GameObject howTo;
 
     private AudioManager Am;
 
     public bool dash;
-    private bool dobleJump;
-    private bool TimeStop;
 
 
     private void Awake()
@@ -32,6 +31,7 @@ public class MainMenuManager : MonoBehaviour
         Shop.SetActive(false);
         Menu.SetActive(true);
         alert.SetActive(false);
+        howTo.SetActive(false); 
     }
 
     private void Update()
@@ -50,7 +50,6 @@ public class MainMenuManager : MonoBehaviour
 
             if (price.Equals(500) && PlayerPrefs.GetInt("dobleJump") != 1)
             {
-                dobleJump = true;
                 PlayerPrefs.SetInt("dobleJump", 1);
 
             }
@@ -61,7 +60,6 @@ public class MainMenuManager : MonoBehaviour
             }
             else if (price.Equals(4000) && PlayerPrefs.GetInt("timeStop") != 1)
             {
-                TimeStop = true;
                 PlayerPrefs.SetInt("timeStop", 1);
             }
             else
@@ -93,8 +91,16 @@ public class MainMenuManager : MonoBehaviour
     {
         Shop.SetActive(false);
         Menu.SetActive(true);
+        howTo.SetActive(false);
         Am.PLaySound(2);
     }
+    public void GoHowTo()
+    {
+        howTo.SetActive(true);
+        Menu.SetActive(false);
+    }
+
+
 
     IEnumerator DesactivateAlert()
     {

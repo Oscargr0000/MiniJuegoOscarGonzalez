@@ -7,7 +7,6 @@ public class SpawnManager : MonoBehaviour
     public GameObject[] fruits;
 
     public bool spawnON;
-    private int test;
 
     void Start()
     {
@@ -25,7 +24,6 @@ public class SpawnManager : MonoBehaviour
             Vector2 position = new Vector2(Random.Range(-8f, 8f), 4);
 
             PlayerPrefs.SetFloat("spawnRate", PlayerPrefs.GetFloat("spawnRate") - 0.03f);
-            Debug.Log(PlayerPrefs.GetFloat("spawnRate"));
 
             Instantiate(fruits[randomNum], position, transform.rotation);
 

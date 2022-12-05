@@ -40,6 +40,9 @@ public class PlayerController : MonoBehaviour
     public bool activatecolddown;
     private bool dashState;
 
+    public ParticleSystem smokeParticle;
+    public ParticleSystem pickupParticle;
+
 
     private void Awake()
     {
@@ -81,43 +84,14 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
-        isWalking = false;
 
-        
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            DetectGround();
-            if (saltosRes > 0)
-            {
-                Rb.AddForce(Vector2.up * forceJump * Time.deltaTime, ForceMode2D.Impulse);
-                saltosRes--;
-            }
-        }
-
-
-        xInput = Input.GetAxisRaw(HORIZONTAL);
-            if (Mathf.Abs(xInput) > inputTol && onAir.Equals(false))
-            {
-                Vector2 translation = new Vector2(xInput * speed, 0);
-                Rb.AddForce(translation, ForceMode2D.Force);
-
-                isWalking = true;
-                if (xInput < 0)
-                {
-                    Sr.flipX = true;
-                }
-                else
-                {
-                    Sr.flipX = false;
-                }
-            }
-
-            //DASH
-        if(activateDash.Equals(true))
+        //DASH
+        if (activateDash.Equals(true))
         {
             if (Input.GetKeyDown(KeyCode.LeftShift) && dashState.Equals(true))
             {
+                Instantiate(smokeParticle, transform.position, transform.rotation);
+
                 float direction = xInput * 2;
                 transform.position = new Vector2(transform.position.x + direction, transform.position.y);
                 dashState = false;
@@ -137,11 +111,44 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.R) && timeStopState.Equals(false))
             {
+                Um.TimeStoped();
                 timeStopState = true;
                 desactivateTime = true;
                 Sm.spawnON = false;
-                
                 StartCoroutine(ActivateTimeIE());
+            }
+        }
+    }
+
+
+    private void FixedUpdate()
+    {
+        isWalking = false;
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            DetectGround();
+            if (saltosRes > 0)
+            {
+                Rb.AddForce(Vector2.up * forceJump * Time.deltaTime, ForceMode2D.Impulse);
+                saltosRes--;
+            }
+        }
+
+        xInput = Input.GetAxisRaw(HORIZONTAL);
+        if (Mathf.Abs(xInput) > inputTol && onAir.Equals(false))
+        {
+            Vector2 translation = new Vector2(xInput * speed, 0);
+            Rb.AddForce(translation, ForceMode2D.Force);
+
+            isWalking = true;
+            if (xInput < 0)
+            {
+                Sr.flipX = true;
+            }
+            else
+            {
+                Sr.flipX = false;
             }
         }
     }
@@ -156,7 +163,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.CompareTag("Items"))
         {
-            
+            Instantiate(pickupParticle, collision.transform.position, transform.rotation);
             Destroy(collision.gameObject);
             int reco = collision.gameObject.GetComponent<ItemsLogic>().recompensa;
 

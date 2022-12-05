@@ -37,8 +37,6 @@ public class DataPersistance : MonoBehaviour
     {
         puntuacionData += _playerController.puntiacionCouter;
         PlayerPrefs.SetInt("currentPoints", puntuacionData);
-
-        Debug.Log(PlayerPrefs.GetInt("currentPoints"));
     }
     public void SaveDataPoints()
     {
