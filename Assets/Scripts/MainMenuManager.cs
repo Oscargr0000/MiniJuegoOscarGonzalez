@@ -31,7 +31,8 @@ public class MainMenuManager : MonoBehaviour
         Shop.SetActive(false);
         Menu.SetActive(true);
         alert.SetActive(false);
-        howTo.SetActive(false); 
+        howTo.SetActive(false);
+        Am.PLayMusic(0);
     }
 
     private void Update()
@@ -98,6 +99,7 @@ public class MainMenuManager : MonoBehaviour
     {
         howTo.SetActive(true);
         Menu.SetActive(false);
+        Am.PLaySound(1);
     }
 
 

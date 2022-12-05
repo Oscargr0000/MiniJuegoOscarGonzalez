@@ -14,6 +14,7 @@ public class AudioManager : MonoBehaviour
     void Start()
     {
         _audiosource = this.GetComponent<AudioSource>(); 
+        
     }
 
     public void PLayMusic(int musics)

@@ -56,6 +56,7 @@ public class ItemsLogic : MonoBehaviour
         Time.timeScale = 0f;
 
         Am._musicSource.Stop();
+        Am.PLayMusic(1);
         
         Pc.enabled = false;
         Sm.spawnON = false;

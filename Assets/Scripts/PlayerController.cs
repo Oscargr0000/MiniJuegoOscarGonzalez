@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-        //DASH
+        //This part is the logic for the dash
         if (activateDash.Equals(true))
         {
             if (Input.GetKeyDown(KeyCode.LeftShift) && dashState.Equals(true))
