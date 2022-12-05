@@ -119,6 +119,11 @@ public class UiManager : MonoBehaviour
         }
 
     }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
    
 
     public void TimeStoped()
@@ -133,4 +138,5 @@ public class UiManager : MonoBehaviour
         yield return new WaitForSeconds(3);
         timeStopEffect.SetActive(false);
     }
+
 }
