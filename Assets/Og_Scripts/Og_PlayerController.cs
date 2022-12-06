@@ -59,21 +59,7 @@ public class Og_PlayerController : MonoBehaviour
         Sm = FindObjectOfType<Og_SpawnManager>();
         Um = FindObjectOfType<Og_UiManager>();
         
-        //Get the information to look if the power are in the player
-        if (PlayerPrefs.GetInt("dashBool").Equals(1))
-        {
-            activateDash = true;
-        }
         
-        if (PlayerPrefs.GetInt("dobleJump").Equals(1))
-        {
-            MaxSaltos = 2;
-        } 
-        
-        if (PlayerPrefs.GetInt("timeStop").Equals(1))
-        {
-            activateTime = true;
-        }
     }
 
     private void Start()
@@ -85,6 +71,22 @@ public class Og_PlayerController : MonoBehaviour
         activatecolddown = false;
         dashState = true;
 
+
+        //Get the information to look if the power are in the player
+        if (PlayerPrefs.GetInt("dashBool").Equals(1))
+        {
+            activateDash = true;
+        }
+
+        if (PlayerPrefs.GetInt("dobleJump").Equals(1))
+        {
+            MaxSaltos = 2;
+        }
+
+        if (PlayerPrefs.GetInt("timeStop").Equals(1))
+        {
+            activateTime = true;
+        }
     }
     void Update()
     {

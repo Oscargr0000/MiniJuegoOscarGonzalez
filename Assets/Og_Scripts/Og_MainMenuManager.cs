@@ -49,17 +49,17 @@ public class Og_MainMenuManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("currentPoints", PlayerPrefs.GetInt("currentPoints") - price);
 
-            if (price.Equals(500) && PlayerPrefs.GetInt("dobleJump") != 1)
+            if (price.Equals(100) && PlayerPrefs.GetInt("dobleJump") != 1)
             {
                 PlayerPrefs.SetInt("dobleJump", 1);
 
             }
-            else if (price.Equals(1500)&& PlayerPrefs.GetInt("dashBool") != 1)
+            else if (price.Equals(250)&& PlayerPrefs.GetInt("dashBool") != 1)
             {
                 dash = true;
                 PlayerPrefs.SetInt("dashBool", 1);
             }
-            else if (price.Equals(4000) && PlayerPrefs.GetInt("timeStop") != 1)
+            else if (price.Equals(300) && PlayerPrefs.GetInt("timeStop") != 1)
             {
                 PlayerPrefs.SetInt("timeStop", 1);
             }

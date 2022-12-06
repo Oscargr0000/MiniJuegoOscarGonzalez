@@ -32,6 +32,16 @@ public class Og_DataPersistance : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            PlayerPrefs.SetInt("dashBool",0);
+            PlayerPrefs.SetInt("dobleJump",0);
+            PlayerPrefs.SetInt("timeStop", 0);
+        }
+    }
+
 
     public void SaveCurrentPoints()
     {
