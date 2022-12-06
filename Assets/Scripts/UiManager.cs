@@ -10,8 +10,6 @@ public class UiManager : MonoBehaviour
     public TextMeshProUGUI timeText;
     public TextMeshProUGUI puntosText;
 
-    public GameObject gameOverCanvas;
-    public GameObject uiCanvas;
 
     public TextMeshProUGUI tPointsOver;
     public TextMeshProUGUI pPointsOver;
@@ -41,8 +39,7 @@ public class UiManager : MonoBehaviour
     {
         Pc = FindObjectOfType<PlayerController>();
         Dp = FindObjectOfType<DataPersistance>();
-        uiCanvas.SetActive(true);
-        gameOverCanvas.SetActive(false);
+
         maxTime = Pc.dashColdDown;
         coolDownDash = 0f;
         timeStopEffect.SetActive(false);
@@ -90,19 +87,12 @@ public class UiManager : MonoBehaviour
         }
 
         Dp.SaveCurrentPoints();
-        Dp.LoadData();
 
-        tPointsOver.text = timeText.text;
-        pPointsOver.text = puntosText.text;
-
-        gameOverCanvas.SetActive(true);
-        uiCanvas.SetActive(false);
+        PlayerPrefs.SetInt("puntos", Pc.totalPuntos);
+        PlayerPrefs.SetFloat("tiempo", currentTime);
     }
 
-    public void GoTo(int escena)
-    {
-        SceneManager.LoadScene(escena);
-    }
+    
 
 
      public void cronometro()
@@ -118,11 +108,6 @@ public class UiManager : MonoBehaviour
             Pc.activatecolddown = false;
         }
 
-    }
-
-    public void ExitGame()
-    {
-        Application.Quit();
     }
    
 

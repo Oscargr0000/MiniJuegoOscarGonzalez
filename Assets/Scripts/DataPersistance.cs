@@ -28,7 +28,7 @@ public class DataPersistance : MonoBehaviour
         maxTime = PlayerPrefs.GetFloat("tiempoFloat");
         puntuacionData = PlayerPrefs.GetInt("currentPoints");
 
-        PlayerPrefs.SetFloat("itemsSpeed", 1.5f);
+        PlayerPrefs.SetFloat("itemsSpeed", 1f);
 
     }
 
@@ -51,13 +51,6 @@ public class DataPersistance : MonoBehaviour
         maxTime = _uiManager.currentTime;
         PlayerPrefs.SetFloat("tiempoFloat", maxTime);
         PlayerPrefs.Save();
-    }
-
-    public void LoadData()
-    {
-        _uiManager.totalPoints.text = PlayerPrefs.GetInt("currentPoints").ToString();
-        _uiManager.recordPpoint.text = PlayerPrefs.GetInt("puntuacionInt").ToString();
-        _uiManager.recordTpoint.text = PlayerPrefs.GetFloat("tiempoFloat").ToString("f2");
     }
 
 

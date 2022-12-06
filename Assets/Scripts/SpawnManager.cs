@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//This script is attach to SpawnManager and contains the logic for the spawn of items
 public class SpawnManager : MonoBehaviour
 {
     public GameObject[] fruits;
@@ -14,16 +16,18 @@ public class SpawnManager : MonoBehaviour
         StartCoroutine(Spawn(PlayerPrefs.GetFloat("spawnRate")));
     }
 
+
+    //Logic for the spawning of the items
     public IEnumerator Spawn(float waitTime)
     {
 
         while (spawnON.Equals(true))
         {
-            int randomNum = Random.Range(0, fruits.Length);
+            int randomNum = Random.Range(0, fruits.Length); //Select the item
 
-            Vector2 position = new Vector2(Random.Range(-8f, 8f), 4);
+            Vector2 position = new Vector2(Random.Range(-8f, 8f), 4); //Select the position for the spawn
 
-            PlayerPrefs.SetFloat("spawnRate", PlayerPrefs.GetFloat("spawnRate") - 0.03f);
+            PlayerPrefs.SetFloat("spawnRate", PlayerPrefs.GetFloat("spawnRate") - 0.03f); //Set the new velocity
 
             Instantiate(fruits[randomNum], position, transform.rotation);
 

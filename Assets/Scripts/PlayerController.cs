@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//This Script is attach to the player and contains the logic for movement, powers,...
 public class PlayerController : MonoBehaviour
 {
     public float speed;
@@ -40,6 +42,8 @@ public class PlayerController : MonoBehaviour
     public bool activatecolddown;
     private bool dashState;
 
+    private bool isJumpPress = false;
+
     public ParticleSystem smokeParticle;
     public ParticleSystem pickupParticle;
 
@@ -55,7 +59,7 @@ public class PlayerController : MonoBehaviour
         Sm = FindObjectOfType<SpawnManager>();
         Um = FindObjectOfType<UiManager>();
         
-
+        //Get the information to look if the power are in the player
         if (PlayerPrefs.GetInt("dashBool").Equals(1))
         {
             activateDash = true;
@@ -84,30 +88,47 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
+        //Detect when the jumping button is pressed
+        if (Input.GetButtonDown("Jump"))
+            isJumpPress = true;
+            DetectGround();
 
-        //This part is the logic for the dash
+
+
+        //Dash Logic
         if (activateDash.Equals(true))
         {
-            if (Input.GetKeyDown(KeyCode.LeftShift) && dashState.Equals(true))
+            if (Input.GetKeyDown(KeyCode.LeftShift) && dashState.Equals(true))  //When is pressed the shift button teleport the player 2m away in the x direction 
             {
+
+                Vector2 lastPos = transform.position;
                 Instantiate(smokeParticle, transform.position, transform.rotation);
 
                 float direction = xInput * 2;
                 transform.position = new Vector2(transform.position.x + direction, transform.position.y);
+
+
+                // Evitate go outsite the map
+                Vector2 updatedPos = transform.position;
+                if(updatedPos.x > 9 || updatedPos.x < -9)
+                {
+                    transform.position = lastPos;
+                }
+
                 dashState = false;
                 StartCoroutine(DashColdDown(dashColdDown));
                 activatecolddown = true;
 
             }
 
-            if (activatecolddown.Equals(true))
+            if (activatecolddown.Equals(true))  //When the dash is used, start the recharge for the dashUI
             {
                 Um.cronometro();
             }
         }
 
         //TIMESTOP
-        if (activateTime.Equals(true))
+        if (activateTime.Equals(true))  //When the R key is pressed, desactivate the movement of the items and the spawnManager.  THIS POWER ONLY WORK 1 TIME
         {
             if (Input.GetKeyDown(KeyCode.R) && timeStopState.Equals(false))
             {
@@ -123,42 +144,33 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        isWalking = false;
+        isWalking = false;  
 
-        if (Input.GetKeyDown(KeyCode.Space))
+
+        //Jumping logic
+        if (isJumpPress)
         {
-            DetectGround();
             if (saltosRes > 0)
             {
                 Rb.AddForce(Vector2.up * forceJump * Time.deltaTime, ForceMode2D.Impulse);
                 saltosRes--;
             }
+
+            isJumpPress = false;
         }
 
-        xInput = Input.GetAxisRaw(HORIZONTAL);
-        if (Mathf.Abs(xInput) > inputTol && onAir.Equals(false))
-        {
-            Vector2 translation = new Vector2(xInput * speed, 0);
-            Rb.AddForce(translation, ForceMode2D.Force);
-
-            isWalking = true;
-            if (xInput < 0)
-            {
-                Sr.flipX = true;
-            }
-            else
-            {
-                Sr.flipX = false;
-            }
-        }
+        Movement();
     }
 
-    private void LateUpdate()
+    private void LateUpdate() //Play the animation for the player
     {
         _animator.SetBool("isWalking", isWalking);
     }
 
 
+
+    // Detect when player picks up an item
+    // The reward for every item is set in the inspector
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Items"))
@@ -173,6 +185,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
+
+    //This funtion detect, by raycast, when the player is touching the ground and resets the counter of the jumps
     void DetectGround()
     {
         float RayCastExtented = 0.01f;
@@ -207,6 +222,7 @@ public class PlayerController : MonoBehaviour
         
     }
 
+    //DESACTIVATE THE TIMESTOP
     public IEnumerator ActivateTimeIE()
     {
         
@@ -214,5 +230,27 @@ public class PlayerController : MonoBehaviour
         desactivateTime = false;
         Sm.spawnON = true;
         StartCoroutine(Sm.Spawn(2));
+    }
+
+
+    //MOVEMENT LOGIC    
+    private void Movement()
+    {
+        xInput = Input.GetAxisRaw(HORIZONTAL);
+        if (Mathf.Abs(xInput) > inputTol && onAir.Equals(false))
+        {
+            Vector2 translation = new Vector2(xInput * speed, 0);
+            Rb.AddForce(translation, ForceMode2D.Force);
+
+            isWalking = true;
+            if (xInput < 0)
+            {
+                Sr.flipX = true;
+            }
+            else
+            {
+                Sr.flipX = false;
+            }
+        }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ItemsLogic : MonoBehaviour
 {
@@ -51,15 +52,12 @@ public class ItemsLogic : MonoBehaviour
         
         UM = FindObjectOfType<UiManager>();
         Am = FindObjectOfType<AudioManager>();
-        UM.GameOverUI();
 
-        Time.timeScale = 0f;
+        UM.GameOverUI();
+        SceneManager.LoadScene(2);
 
         Am._musicSource.Stop();
         Am.PLayMusic(1);
-        
-        Pc.enabled = false;
-        Sm.spawnON = false;
 
         
     }
