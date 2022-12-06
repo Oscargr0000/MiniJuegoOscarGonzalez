@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class UiManager : MonoBehaviour
+public class Og_UiManager : MonoBehaviour
 {
     public TextMeshProUGUI timeText;
     public TextMeshProUGUI puntosText;
@@ -17,8 +17,8 @@ public class UiManager : MonoBehaviour
     public TextMeshProUGUI recordTpoint;
     public TextMeshProUGUI totalPoints;
 
-    private PlayerController Pc;
-    private DataPersistance Dp;
+    private Og_PlayerController Pc;
+    private Og_DataPersistance Dp;
 
     public float currentTime;
 
@@ -37,8 +37,8 @@ public class UiManager : MonoBehaviour
 
     void Start()
     {
-        Pc = FindObjectOfType<PlayerController>();
-        Dp = FindObjectOfType<DataPersistance>();
+        Pc = FindObjectOfType<Og_PlayerController>();
+        Dp = FindObjectOfType<Og_DataPersistance>();
 
         maxTime = Pc.dashColdDown;
         coolDownDash = 0f;

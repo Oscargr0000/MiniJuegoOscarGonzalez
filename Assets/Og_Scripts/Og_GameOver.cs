@@ -12,12 +12,12 @@ public class Og_GameOver : MonoBehaviour
     public TextMeshProUGUI recordTpoint;
     public TextMeshProUGUI totalPoints;
 
-    private AudioManager Am;
+    private Og_AudioManager Am;
 
     void Start()
     {
 
-        Am = FindObjectOfType<AudioManager>();
+        Am = FindObjectOfType<Og_AudioManager>();
         tPointsOver.text = PlayerPrefs.GetInt("puntos").ToString();
         pPointsOver.text = PlayerPrefs.GetFloat("tiempo").ToString("f2");
 

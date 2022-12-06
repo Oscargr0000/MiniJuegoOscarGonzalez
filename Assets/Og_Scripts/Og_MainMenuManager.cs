@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-public class MainMenuManager : MonoBehaviour
+public class Og_MainMenuManager : MonoBehaviour
 {
 
     public TextMeshProUGUI totalPoints;
@@ -14,14 +14,14 @@ public class MainMenuManager : MonoBehaviour
     public GameObject alert;
     public GameObject howTo;
 
-    private AudioManager Am;
+    private Og_AudioManager Am;
 
     public bool dash;
 
 
     private void Awake()
     {
-        Am = FindObjectOfType<AudioManager>();
+        Am = FindObjectOfType<Og_AudioManager>();
     }
 
 

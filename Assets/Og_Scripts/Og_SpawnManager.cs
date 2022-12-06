@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 //This script is attach to SpawnManager and contains the logic for the spawn of items
-public class SpawnManager : MonoBehaviour
+public class Og_SpawnManager : MonoBehaviour
 {
     public GameObject[] fruits;
 

@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DataPersistance : MonoBehaviour
+public class Og_DataPersistance : MonoBehaviour
 {
-    private UiManager _uiManager;
-    private ItemsLogic _itemLogic;
-    private SpawnManager _spawnManager;
-    private PlayerController _playerController;
-    private MainMenuManager _Mmm;
+    private Og_UiManager _uiManager;
+    private Og_ItemsLogic _itemLogic;
+    private Og_SpawnManager _spawnManager;
+    private Og_PlayerController _playerController;
+    private Og_MainMenuManager _Mmm;
 
     public int maxPoints;
     public float maxTime;
@@ -17,9 +17,9 @@ public class DataPersistance : MonoBehaviour
 
     private void Awake()
     {
-        _uiManager = FindObjectOfType<UiManager>();
-        _playerController = FindObjectOfType<PlayerController>();
-        _Mmm = FindObjectOfType<MainMenuManager>();
+        _uiManager = FindObjectOfType<Og_UiManager>();
+        _playerController = FindObjectOfType<Og_PlayerController>();
+        _Mmm = FindObjectOfType<Og_MainMenuManager>();
         PlayerPrefs.SetFloat("spawnRate", 2);
     }
     private void Start()

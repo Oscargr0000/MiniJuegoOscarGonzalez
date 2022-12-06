@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 //This Script is attach to the player and contains the logic for movement, powers,...
-public class PlayerController : MonoBehaviour
+public class Og_PlayerController : MonoBehaviour
 {
     public float speed;
     [SerializeField]private float forceJump = 30000f;
@@ -24,10 +24,10 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer Sr;
     private Rigidbody2D Rb;
     private CapsuleCollider2D Cc;
-    private AudioManager Am;
-    private ItemsLogic Il;
-    private SpawnManager Sm;
-    private UiManager Um;
+    private Og_AudioManager Am;
+    private Og_ItemsLogic Il;
+    private Og_SpawnManager Sm;
+    private Og_UiManager Um;
 
     public LayerMask Ground;
     public int puntiacionCouter;
@@ -54,10 +54,10 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponent<Animator>();
         Sr = GetComponent<SpriteRenderer>();
         Cc = GetComponent<CapsuleCollider2D>();
-        Am = FindObjectOfType<AudioManager>();
-        Il = FindObjectOfType<ItemsLogic>();
-        Sm = FindObjectOfType<SpawnManager>();
-        Um = FindObjectOfType<UiManager>();
+        Am = FindObjectOfType<Og_AudioManager>();
+        Il = FindObjectOfType<Og_ItemsLogic>();
+        Sm = FindObjectOfType<Og_SpawnManager>();
+        Um = FindObjectOfType<Og_UiManager>();
         
         //Get the information to look if the power are in the player
         if (PlayerPrefs.GetInt("dashBool").Equals(1))
@@ -177,7 +177,7 @@ public class PlayerController : MonoBehaviour
         {
             Instantiate(pickupParticle, collision.transform.position, transform.rotation);
             Destroy(collision.gameObject);
-            int reco = collision.gameObject.GetComponent<ItemsLogic>().recompensa;
+            int reco = collision.gameObject.GetComponent<Og_ItemsLogic>().recompensa;
 
             puntiacionCouter = puntiacionCouter + reco;
             totalPuntos = puntiacionCouter;

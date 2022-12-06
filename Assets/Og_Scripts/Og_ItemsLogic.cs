@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ItemsLogic : MonoBehaviour
+public class Og_ItemsLogic : MonoBehaviour
 {
     
 
     public int recompensa;
 
-    private SpawnManager Sm;
-    private PlayerController Pc;
-    private UiManager UM;
-    private AudioManager Am;
+    private Og_SpawnManager Sm;
+    private Og_PlayerController Pc;
+    private Og_UiManager UM;
+    private Og_AudioManager Am;
 
     public int spawnedCouter;
 
@@ -23,7 +23,7 @@ public class ItemsLogic : MonoBehaviour
         isActivated = true;
         spawnedCouter++;
 
-        Pc = FindObjectOfType<PlayerController>();
+        Pc = FindObjectOfType<Og_PlayerController>();
         PlayerPrefs.SetFloat("itemsSpeed", PlayerPrefs.GetFloat("itemsSpeed") + spawnedCouter * 0.03f);
     }
 
@@ -48,10 +48,10 @@ public class ItemsLogic : MonoBehaviour
 
     void GameOver()
     {
-        Sm = FindObjectOfType<SpawnManager>();
+        Sm = FindObjectOfType<Og_SpawnManager>();
         
-        UM = FindObjectOfType<UiManager>();
-        Am = FindObjectOfType<AudioManager>();
+        UM = FindObjectOfType<Og_UiManager>();
+        Am = FindObjectOfType<Og_AudioManager>();
 
         UM.GameOverUI();
         SceneManager.LoadScene(2);
