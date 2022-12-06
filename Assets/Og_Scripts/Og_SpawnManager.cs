@@ -25,7 +25,7 @@ public class Og_SpawnManager : MonoBehaviour
         {
             int randomNum = Random.Range(0, fruits.Length); //Select the item
 
-            Vector2 position = new Vector2(Random.Range(-8f, 8f), 4); //Select the position for the spawn
+            Vector2 position = new Vector2(Random.Range(-8f, 8f), 4.5f); //Select the position for the spawn
 
             PlayerPrefs.SetFloat("spawnRate", PlayerPrefs.GetFloat("spawnRate") - 0.03f); //Set the new velocity
 
